@@ -10,6 +10,7 @@ pygmentsCodeFencesGuessSyntax = true
 enableEmoji = true
 # Enable Disqus comments
 disqusShortname = "bkosborne"
+rssLimit = 10
 
 [params]
 author = "Brian Osborne"
@@ -126,3 +127,4 @@ url = "posts/"
 
 [permalinks]
 posts = '/blog/:title'
+
