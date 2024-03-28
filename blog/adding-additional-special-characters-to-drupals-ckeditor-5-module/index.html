@@ -1,0 +1,156 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta http-equiv=Content-Security-Policy content="upgrade-insecure-requests; block-all-mixed-content; default-src 'self'; child-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net/; form-action 'self'; frame-src 'self'; img-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com/ https://cdn.jsdelivr.net/; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://cdn.jsdelivr.net/; prefetch-src 'self'; connect-src 'self' https://www.google-analytics.com;"><meta name=author content="Brian Osborne"><meta name=description content="CKEditor 5 has a plugin called Special Characters that Drupal&rsquo;s CKEditor 5 module makes available to use. The plugin provides a toolbar button that can be used to insert characters that may not be easy to type manually using a keyboard, especially for people who are not used to using them frequently.
+It comes with a list of default special characters, organized by category. One such category is for Latin characters and includes characters such as Ā, Ć, and Ē."><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Adding Additional Special Characters to Drupal's CKEditor 5 Module"><meta name=twitter:description content="CKEditor 5 has a plugin called Special Characters that Drupal&rsquo;s CKEditor 5 module makes available to use. The plugin provides a toolbar button that can be used to insert characters that may not be easy to type manually using a keyboard, especially for people who are not used to using them frequently.
+It comes with a list of default special characters, organized by category. One such category is for Latin characters and includes characters such as Ā, Ć, and Ē."><meta property="og:title" content="Adding Additional Special Characters to Drupal's CKEditor 5 Module"><meta property="og:description" content="CKEditor 5 has a plugin called Special Characters that Drupal&rsquo;s CKEditor 5 module makes available to use. The plugin provides a toolbar button that can be used to insert characters that may not be easy to type manually using a keyboard, especially for people who are not used to using them frequently.
+It comes with a list of default special characters, organized by category. One such category is for Latin characters and includes characters such as Ā, Ć, and Ē."><meta property="og:type" content="article"><meta property="og:url" content="http://bkosborne.com/blog/adding-additional-special-characters-to-drupals-ckeditor-5-module/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-03-28T00:00:00+00:00"><meta property="article:modified_time" content="2024-03-28T00:00:00+00:00"><title>Adding Additional Special Characters to Drupal's CKEditor 5 Module · Brian Osborne
+</title><link rel=canonical href=http://bkosborne.com/blog/adding-additional-special-characters-to-drupals-ckeditor-5-module/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.d9fddbffe6f27e69985dc5fe0471cdb0e57fbf4775714bc3d847accb08f4a1f6.css integrity="sha256-2f3b/+byfmmYXcX+BHHNsOV/v0d1cUvD2Eesywj0ofY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.002ee2378e14c7a68f1f0a53d9694ed252090987c4e768023fac694a4fc5f793.css integrity="sha256-AC7iN44Ux6aPHwpT2WlO0lIJCYfE52gCP6xpSk/F95M=" crossorigin=anonymous media=screen><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><meta name=generator content="Hugo 0.124.1"></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/>Brian Osborne
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/about/>About</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=http://bkosborne.com/blog/adding-additional-special-characters-to-drupals-ckeditor-5-module/>Adding Additional Special Characters to Drupal's CKEditor 5 Module</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2024-03-28T00:00:00Z>March 28, 2024
+</time></span><span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+6-minute read</span></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/drupal-planet/>Drupal Planet</a></span></div></div></header><div><p>CKEditor 5 has a plugin called <a href=https://ckeditor.com/docs/ckeditor5/latest/features/special-characters.html>Special Characters</a>
+that Drupal&rsquo;s CKEditor 5 module makes available to use. The plugin provides a toolbar button that can be used
+to insert characters that may not be easy to type manually using a keyboard, especially for people who are not used
+to using them frequently.</p><p>It comes with a list of default special characters, organized by category. One such category is for
+Latin characters and includes characters such as Ā, Ć, and Ē. However, it lacks some other
+characters that were found in the same plugin for CKEditor 4 such as Á, Ç, and É.</p><p>I&rsquo;m not sure why the same character set from the CKEditor 4 plugin was not included in CKEditor 5.
+Thankfully, the plugin provides an easy way to extend the list of available special characters:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=font-weight:700>import</span> { SpecialCharacters, SpecialCharactersEssentials } from <span style=font-style:italic>&#39;@ckeditor/ckeditor5-special-characters&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>function</span> SpecialCharactersExtended( editor ) {
+</span></span><span style=display:flex><span>    editor.plugins.get( <span style=font-style:italic>&#39;SpecialCharacters&#39;</span> ).addItems( <span style=font-style:italic>&#39;Mathematical&#39;</span>, [
+</span></span><span style=display:flex><span>        { title: <span style=font-style:italic>&#39;alpha&#39;</span>, character: <span style=font-style:italic>&#39;α&#39;</span> },
+</span></span><span style=display:flex><span>        { title: <span style=font-style:italic>&#39;beta&#39;</span>, character: <span style=font-style:italic>&#39;β&#39;</span> },
+</span></span><span style=display:flex><span>        { title: <span style=font-style:italic>&#39;gamma&#39;</span>, character: <span style=font-style:italic>&#39;γ&#39;</span> }
+</span></span><span style=display:flex><span>    ] );
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ClassicEditor
+</span></span><span style=display:flex><span>    .create( document.querySelector( <span style=font-style:italic>&#39;#editor&#39;</span> ), {
+</span></span><span style=display:flex><span>        plugins: [
+</span></span><span style=display:flex><span>            SpecialCharacters, SpecialCharactersEssentials, SpecialCharactersExtended,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=font-style:italic>// More plugins.
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span>            <span style=font-style:italic>// ...
+</span></span></span><span style=display:flex><span><span style=font-style:italic></span>        ],
+</span></span><span style=display:flex><span>        toolbar: [ <span style=font-style:italic>&#39;specialCharacters&#39;</span>, <span style=font-style:italic>/* ... */</span> ],
+</span></span><span style=display:flex><span>    } )
+</span></span><span style=display:flex><span>    .then( <span style=font-style:italic>/* ... */</span> )
+</span></span><span style=display:flex><span>    .<span style=font-weight:700>catch</span>( <span style=font-style:italic>/* ... */</span> );
+</span></span></code></pre></div><h2 id=drupal-integration>Drupal Integration
+<a class=heading-link href=#drupal-integration><i class="fa fa-link" aria-hidden=true></i></a></h2><p>The code above assumes you have access to the JS code when the CKEditor 5 instance is created.
+Drupal&rsquo;s module does all this for us, and while there&rsquo;s an alter hook you can use to modify the
+editor configuration data, creating a simple custom plugin may be the best solution.</p><p>Drupal has a robust framework for creating custom CKEditor 5 plugins and <a href=https://www.drupal.org/project/ckeditor5_dev>there&rsquo;s a module called CKEditor 5 Dev</a> to help people get started.</p><p>Use the plugin starter kit example module from that module to get started, which will walk
+you through the necessary configuration files to register a CKE5 plugin.</p><p>Once you have the sample plugin working and being recognized by Drupal (to get comfortable with
+how it all works), you can create a new plugin for adding additional special characters.</p><p>Create a file in your module called <code>js/ckeditor5_plugins/additionalSpecialCharacters/src/index.js</code> with
+the following contents:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=font-weight:700>import</span> { Plugin } from <span style=font-style:italic>&#34;ckeditor5/src/core&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-style:italic>/**
+</span></span></span><span style=display:flex><span><span style=font-style:italic> * Registers additional special characters.
+</span></span></span><span style=display:flex><span><span style=font-style:italic> */</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>class</span> AdditionalSpecialCharacters <span style=font-weight:700>extends</span> Plugin {
+</span></span><span style=display:flex><span>  <span style=font-style:italic>/**
+</span></span></span><span style=display:flex><span><span style=font-style:italic>   * @inheritDoc
+</span></span></span><span style=display:flex><span><span style=font-style:italic>   */</span>
+</span></span><span style=display:flex><span>  <span style=font-weight:700>static</span> get pluginName() {
+</span></span><span style=display:flex><span>    <span style=font-weight:700>return</span> <span style=font-style:italic>&#39;AdditionalSpecialCharacters&#39;</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=font-style:italic>/**
+</span></span></span><span style=display:flex><span><span style=font-style:italic>   * @inheritDoc
+</span></span></span><span style=display:flex><span><span style=font-style:italic>   */</span>
+</span></span><span style=display:flex><span>  init() {
+</span></span><span style=display:flex><span>    <span style=font-weight:700>if</span> (<span style=font-weight:700>this</span>.editor.plugins.has(<span style=font-style:italic>&#39;SpecialCharacters&#39;</span>)) {
+</span></span><span style=display:flex><span>      <span style=font-weight:700>this</span>.editor.plugins.get(<span style=font-style:italic>&#39;SpecialCharacters&#39;</span>).addItems( <span style=font-style:italic>&#39;Latin&#39;</span>, [
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Á&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter a with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;á&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter a with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;À&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter a with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;à&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter a with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Â&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter a with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;â&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter a with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ä&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter a with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ä&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter a with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Å&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter a with ring above&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;å&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter a with ring above&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Æ&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital ligature ae&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;æ&#34;</span>, title: <span style=font-style:italic>&#34;Latin small ligature ae&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ç&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter c with cedilla&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ç&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter c with cedilla&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ð&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter eth&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ð&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter eth&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;É&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter e with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;é&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter e with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;È&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter e with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;è&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter e with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ê&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter e with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ê&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter e with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ë&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter e with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ë&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter e with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Í&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter i with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;í&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter i with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ì&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter i with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ì&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter i with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Î&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter i with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;î&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter i with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ï&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter i with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ï&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter i with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ñ&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter n with tilde&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ñ&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter n with tilde&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ó&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter o with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ó&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter o with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ò&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter o with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ò&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter o with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ô&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter o with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ô&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter o with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ö&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter o with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ö&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter o with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ø&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter o with stroke&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ø&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter o with stroke&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ú&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter u with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ú&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter u with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ù&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter u with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ù&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter u with grave accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Û&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter u with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;û&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter u with circumflex&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ü&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter u with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ü&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter u with diaeresis&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Ý&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter y with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ý&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter y with acute accent&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;Þ&#34;</span>, title: <span style=font-style:italic>&#34;Latin capital letter thorn&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;þ&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter thorn&#34;</span>},
+</span></span><span style=display:flex><span>        {character: <span style=font-style:italic>&#34;ß&#34;</span>, title: <span style=font-style:italic>&#34;Latin small letter sharp s&#34;</span>},
+</span></span><span style=display:flex><span>      ] );
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>export</span> <span style=font-weight:700>default</span> {
+</span></span><span style=display:flex><span>  AdditionalSpecialCharacters
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Now run <code>yarn build</code> from your module&rsquo;s directory to have the <code>js/build/additionalSpecialCharacters.js</code>
+file created by webpack.</p><p>Register a Drupal library for the JS file in your module&rsquo;s <code>*.libraries.yml</code> file:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>ckeditor5_additional_special_characters:
+</span></span><span style=display:flex><span>  js:
+</span></span><span style=display:flex><span>    js/build/additionalSpecialCharacters.js: { minified: true }
+</span></span><span style=display:flex><span>  dependencies:
+</span></span><span style=display:flex><span>    - core/ckeditor5
+</span></span></code></pre></div><p>And finally, register it as a CKEditor 5 plugin. Doing this will have the plugin automatically included
+in all CKEditor 5 instances on your site. Edit your modules <code>*.ckeditor5.yml</code> file:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>ps_core_additional_special_characters:
+</span></span><span style=display:flex><span>  ckeditor5:
+</span></span><span style=display:flex><span>    plugins:
+</span></span><span style=display:flex><span>      - additionalSpecialCharacters.AdditionalSpecialCharacters
+</span></span><span style=display:flex><span>  drupal:
+</span></span><span style=display:flex><span>    label: Additional Special Characters
+</span></span><span style=display:flex><span>    library: your_module_name/ckeditor5_additional_special_characters
+</span></span><span style=display:flex><span>    conditions: []
+</span></span><span style=display:flex><span>    elements: false
+</span></span></code></pre></div><p>After clearing caches, the plugin should be loaded, and you should see the additional set of Latin
+characters in the special characters drop-down (assuming your editor is configured with the
+Special Characters plugin, of course).</p><h2 id=going-further>Going Further
+<a class=heading-link href=#going-further><i class="fa fa-link" aria-hidden=true></i></a></h2><p>Someone could take this further and make a Drupal UI for configuring the list of extra special
+characters. Drupal&rsquo;s CKEditor 5 plugin framework has the tools available to create
+such a plugin configuration form. This would prevent the need to hard-code the list of additional
+characters in the plugin file.</p></div><footer><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//bkosborne.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></footer></article></section></div><footer class=footer><section class=container>©
+2010 -
+2024
+Brian Osborne
+·
+Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/>Coder</a>.</section></footer></main><script src=/js/coder.min.9cf2dbf9b6989ef8eae941ffb4231c26d1dc026bca38f1d19fdba50177d8a9ac.js integrity="sha256-nPLb+baYnvjq6UH/tCMcJtHcAmvKOPHRn9ulAXfYqaw="></script><script defer src=https://static.cloudflareinsights.com/beacon.min.js data-cf-beacon='{"token": "bd8a23ecd0e34c58a89099ab25d009a"}'></script></body></html>
